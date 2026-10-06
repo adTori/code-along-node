@@ -55,9 +55,30 @@ app.post("/create", (req, res)=> {
 
 // Updatera en befintlig användare
 
+app.put("/update", (req, res) => {
+
+    const {username, new_username} = req.body;
+
+    const this_user = users.find(row => row.username === username)
+
+    this_user.username = new_username
+
+    res.send(`Användaren ${username} bytte namn till ${new_username}. Uppdaterad lista ${users.map(row => row.username)}`)
+
+});
 
 
 // Ta bort en användare
+
+app.delete("/delete", (req, res) => {
+
+    const {username} = req.body
+
+    users = users.filter(row => row.username !== username)
+
+    res.send(`Användaren ${username}, tog bort sitt konto. Uppdaterad lista ${users.map(row => row.username)}`)
+
+});
 
 
 
